@@ -2,6 +2,9 @@
 
 Parses a string (usually the contents of a file) to find related files based on annotations within the file.
 
+It makes no attempt to programmatically determine related files; instead, file authors get to specify the full
+and correct list of related files.
+
 ## Contents
 
 - `src/related.js` is the main implementation
@@ -16,6 +19,10 @@ This is a simple annotation:
 
     @related [test](/src/related.test.js)
 
+which would return:
+
+    [{name: "test", path: "/src/related.test.js"}]
+
 Annotations are usually in comments:
 
     // @related [test](/src/related.test.js)
@@ -25,6 +32,14 @@ Annotations are usually in comments:
 A single line can have multiple annotations and unrelated text:
 
     // See @related [test](/src/related.test.js), [test](/src/other.test.js), and [css](/assets/style.css)
+
+which would return:
+
+    [
+      {name: "test", path: "/src/related.test.js"},
+      {name: "test", path: "/src/other.test.js"},
+      {name: "css", path: "/assets/style.css"}
+    ]
 
 ## Multi-line annotations
 
