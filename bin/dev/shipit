@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set +x
+set -euo pipefail
+trap "exit" INT
+set -x
+
+bin/dev/update
+bin/dev/build
+bin/dev/test
+git push origin HEAD

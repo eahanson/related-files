@@ -1,0 +1,14 @@
+{
+  "name": "related-files",
+  "version": "1.0.0",
+  "description": "Parses 'related files' annotations in text",
+  "main": "src/related.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Erik Hanson",
+  "license": "Apache 2",
+  "devDependencies": {
+    "jest": "^27.5.1"
+  }
+}
