@@ -14,24 +14,27 @@ file type (e.g., "test", "css", "header") and a path to the file. The annotation
 
 This is a simple annotation:
 
-# @related [test](/src/related.test.js)
+    @related [test](/src/related.test.js)
+
+Annotations are usually in comments:
+
+    // @related [test](/src/related.test.js)
+    /* @related [test](/src/related.test.js) */
+    # @related [test](/src/related.test.js)
 
 A single line can have multiple annotations and unrelated text:
 
-// See @related [test](/src/related.test.js), [test](/src/other.test.js), and [css](/assets/style.css)
+    // See @related [test](/src/related.test.js), [test](/src/other.test.js), and [css](/assets/style.css)
 
 ## Multi-line annotations
 
 If the last non-space character in an annotation is a backslash (`\`), the next line of text is scanned
 for annotations:
 
-# @related \
-
-# [test](/test/core/foo_test.exs) \
-
-# [test](/test/integration/bar_test.exs) \
-
-# [sass](/assets/css/foo.sass)
+    # @related \
+    #   [test](/test/core/foo_test.exs) \
+    #   [test](/test/integration/bar_test.exs) \
+    #   [sass](/assets/css/foo.sass)
 
 ## File paths
 
