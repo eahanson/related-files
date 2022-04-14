@@ -1,25 +1,35 @@
 // @related [test](/src/related.test.js)
 
-// Accepts a single string and returns an array of related file objects with `name` and `path` keys.
+/* Accepts a single string and returns an array of related file objects with `name` and `path` keys. */
 function related(text) {
-  if (text && typeof text == "string") {
-    return findRelated(text);
+  return findAnnotatedLines(text).reduce((lines, line) => {
+    return lines.concat(findLinks(line));
+  }, []);
+}
+
+// // //
+
+function findAnnotatedLines(text) {
+  if (isNonEmptyString(text)) {
+    return text.split("\n").filter((line) => /@related/.test(line));
   } else {
     return [];
   }
 }
 
-module.exports = related;
-
-// // //
-
-function findRelated(text) {
-  const re = /@related\s+[^\[]*\[([^\]]+)\]\(([^\)]+)\)/g;
+function findLinks(line) {
+  const re = /[^\[]*\[([^\]]+)\]\(([^\)]+)\)/g;
   let result = [];
 
-  while ((match = re.exec(text))) {
+  while ((match = re.exec(line))) {
     result.push({ name: match[1], path: match[2] });
   }
 
   return result;
 }
+
+function isNonEmptyString(s) {
+  return s && typeof s == "string" && !/^\s*$/.test(s);
+}
+
+module.exports = { related, findAnnotatedLines, findLinks };

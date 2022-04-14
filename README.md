@@ -59,6 +59,6 @@ current file.
 
 ## TODO
 
-    [X] one annotation per line
-    [ ] multiple annotations per line
-    [ ] multi-line annotations
+- [x] one annotation per line
+- [x] multiple annotations per line
+- [ ] multi-line annotations
