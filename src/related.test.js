@@ -1,4 +1,4 @@
-const { related, findAnnotatedLines, findLinks } = require("./related");
+const { related, _findAnnotatedLines, _findLinks } = require("./related");
 
 describe("related", () => {
   test("returns [] when the input is not a string", () => {
@@ -92,44 +92,44 @@ describe("related", () => {
 
 describe("findAnnotatedLines", () => {
   test("returns [] when the input is not a string", () => {
-    expect(findAnnotatedLines(undefined)).toStrictEqual([]);
-    expect(findAnnotatedLines(4)).toStrictEqual([]);
+    expect(_findAnnotatedLines(undefined)).toStrictEqual([]);
+    expect(_findAnnotatedLines(4)).toStrictEqual([]);
   });
 
   test("returns [] when the input is blank", () => {
-    expect(findAnnotatedLines("")).toStrictEqual([]);
-    expect(findAnnotatedLines("  ")).toStrictEqual([]);
+    expect(_findAnnotatedLines("")).toStrictEqual([]);
+    expect(_findAnnotatedLines("  ")).toStrictEqual([]);
   });
 
   test("returns [] when there are no annotated lines", () => {
-    expect(findAnnotatedLines("foo\nbar\nbaz\n")).toStrictEqual([]);
+    expect(_findAnnotatedLines("foo\nbar\nbaz\n")).toStrictEqual([]);
   });
 
   test("returns annotated lines", () => {
     expect(
-      findAnnotatedLines("foo\n@related bar\nbaz @related baz\nfez\n")
+      _findAnnotatedLines("foo\n@related bar\nbaz @related baz\nfez\n")
     ).toStrictEqual(["@related bar", "baz @related baz"]);
   });
 });
 
 describe("findLinks", () => {
   test("returns [] when the input is blank", () => {
-    expect(findLinks(" ")).toStrictEqual([]);
+    expect(_findLinks(" ")).toStrictEqual([]);
   });
 
   test("returns the link when there is one", () => {
-    expect(findLinks("[foo](/foo.txt)")).toStrictEqual([
+    expect(_findLinks("[foo](/foo.txt)")).toStrictEqual([
       { name: "foo", path: "/foo.txt" },
     ]);
 
-    expect(findLinks("blah [foo](/foo.txt) blah")).toStrictEqual([
+    expect(_findLinks("blah [foo](/foo.txt) blah")).toStrictEqual([
       { name: "foo", path: "/foo.txt" },
     ]);
   });
 
   test("returns all the links", () => {
     expect(
-      findLinks("blah [foo](/foo.txt) blah [bar](/bar.txt) blah")
+      _findLinks("blah [foo](/foo.txt) blah [bar](/bar.txt) blah")
     ).toStrictEqual([
       { name: "foo", path: "/foo.txt" },
       { name: "bar", path: "/bar.txt" },

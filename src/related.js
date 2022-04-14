@@ -32,4 +32,8 @@ function isNonEmptyString(s) {
   return s && typeof s == "string" && !/^\s*$/.test(s);
 }
 
-module.exports = { related, findAnnotatedLines, findLinks };
+module.exports = {
+  related,
+  _findAnnotatedLines: findAnnotatedLines,
+  _findLinks: findLinks,
+};
