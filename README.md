@@ -62,3 +62,10 @@ current file.
 - [x] one annotation per line
 - [x] multiple annotations per line
 - [ ] multi-line annotations
+
+## License, Copyright, Attributions
+
+Copyright 2022 Erik Hanson.
+Apache 2.0 licensed (see [LICENSE](https://github.com/eahanson/related-files/blob/main/LICENSE)).
+The Nova extension's icon is a modified version of an icon from [Font Awesome](https://fontawesome.com/)
+which is licensed under [CC BY 4.0](https://fontawesome.com/license).

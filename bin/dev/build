@@ -6,4 +6,4 @@ trap "exit" INT
 set -x
 
 npm install
-# cp src/sort.js smart-sort-lines.novaextension/Scripts
+cp src/related.js related-files.novaextension/Scripts

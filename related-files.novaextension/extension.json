@@ -1,0 +1,23 @@
+{
+  "activationEvents": ["*"],
+  "bugs": "https://github.com/eahanson/related-files/issues",
+  "categories": ["commands"],
+  "commands": {
+    "editor": [
+      {
+        "title": "Open Related File…",
+        "command": "related-files.open-related-file",
+        "when": "*"
+      }
+    ]
+  },
+  "description": "Jump to a file related to the current file.",
+  "entitlements": {},
+  "homepage": "https://github.com/eahanson/related-files",
+  "identifier": "eahanson.related-files",
+  "main": "main.js",
+  "name": "Open Related File",
+  "organization": "Erik Hanson",
+  "repository": "https://github.com/eahanson/related-files",
+  "version": "1.0.0"
+}
