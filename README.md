@@ -2,13 +2,16 @@
 
 Parses a string (usually the contents of a file) to find related files based on annotations within the file.
 
-It makes no attempt to programmatically determine related files; instead, file authors get to specify the full
-and correct list of related files.
+It's common for code editors to have a built-in or extension-provided feature to switch between
+a code file and its test, using some heuristics that work most of the time. Some editors and
+extensions will also try to jump to other kinds of related files, such as CSS files. In my
+experience, these tools find the related files often enough to sound promising, but are
+frustrating in practice because they don't work 100% of the time, or don't work on entire
+types of files.
 
-## Contents
-
-- `src/related.js` is the main implementation
-- `related-files.novaextension` is an extension for the [Nova](https://nova.app) editor
+This repo contains Javascript code to parse annotations in a string, returning a list of `key`/`path` objects.
+It also contains an extension for the [Nova](https://nova.app) editor that lets users open one of the
+related files.
 
 ## Annotations
 
