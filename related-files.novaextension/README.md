@@ -43,7 +43,7 @@ This works with any text file; the `@related` annotation can be in a comment, in
 To run Open Related Files, select the **Editor → Open Related File…** menu item
 or open the command palette and type `Open Related File…`. (It will be a lot more useful if you assign
 a keyboard shortcut. I use `ctrl+option+R`.) If there is a `@related` annotation in the file, that
-file will be opened. If there are more than one annotation in the file, a palette will appear letting
+file will be opened. If there is more than one annotation in the file, a palette will appear letting
 you choose the file to open.
 
 ## Contributing

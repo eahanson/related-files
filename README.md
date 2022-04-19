@@ -46,6 +46,8 @@ which would return:
 
 ## Multi-line annotations
 
+**NOT YET SUPPORTED**
+
 If the last non-space character in an annotation is a backslash (`\`), the next line of text is scanned
 for annotations:
 
@@ -65,6 +67,11 @@ current file.
 - [x] one annotation per line
 - [x] multiple annotations per line
 - [ ] multi-line annotations
+
+## Contributing
+
+Contributions are welcome. Use `bin/dev/test` to test changes, `bin/dev/build` to copy the changed JS file
+to the Nova extension dir.
 
 ## License, Copyright, Attributions
 
