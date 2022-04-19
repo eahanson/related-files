@@ -18,7 +18,7 @@ nova.commands.register("related-files.open-related-file", (editor) => {
   } else if (files.length == 1) {
     return openFile(files[0]);
   } else {
-    const names = files.map((file) => file.name);
+    const names = files.map((file) => `${file.name} — ${file.path}`);
     nova.workspace.showChoicePalette(names, {}, (name, index) =>
       openFile(files[index])
     );
