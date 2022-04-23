@@ -6,4 +6,9 @@ trap "exit" INT
 set -x
 
 npm install
+
 cp src/related.js related-files.novaextension/Scripts
+cp CHANGELOG.md related-files.novaextension/
+
+cp src/related.js related-files.vscode/
+cp CHANGELOG.md related-files.vscode/

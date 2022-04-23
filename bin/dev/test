@@ -5,4 +5,4 @@ set -euo pipefail
 trap "exit" INT
 set -x
 
-npm run test
+npm run test src/

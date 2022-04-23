@@ -20,7 +20,6 @@ function findAnnotatedLines(text) {
 function findLinks(line) {
   const re = /[^\[]*\[([^\]]+)\]\(([^\)]+)\)/g;
   let result = [];
-  let match;
 
   while ((match = re.exec(line))) {
     result.push({ name: match[1], path: match[2] });
