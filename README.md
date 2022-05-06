@@ -1,19 +1,36 @@
 # related-files
 
-Parses a string (usually the contents of a file) to find related files based on annotations within the file.
+A Javascript library that parses a string (usually the contents of a file) to find related file paths
+based on annotations within the file.
 
-It's common for code editors to have a built-in or extension-provided feature to switch between
+## Intro
+
+It's common for code editors to have a built-in or extension-provided features to switch between
 a code file and its test, using some heuristics that work most of the time. Some editors and
 extensions will also try to jump to other kinds of related files, such as CSS files. In my
 experience, these tools find the related files often enough to sound promising, but are
 frustrating in practice because they don't work 100% of the time, or don't work on entire
 types of files.
 
-This repo contains Javascript code to parse annotations in a string, returning a list of `key`/`path` objects.
-It also contains an extension for the [Nova](https://nova.app) editor that lets users open one of the
-related files.
+This repository holds the Javascript that does the work of matching files. See the next section
+for text editor plugins.
 
-## Annotations
+## Text Editor Plugins
+
+### [neovim](https://neovim.io)
+* repo: [synchronal/related-files.nvim](https://github.com/synchronal/related-files.nvim)
+
+### [nova](https://nova.app)
+* repo: [synchronal/related-files.novaextension](https://github.com/synchronal/related-files.novaextension)
+* plugin: [Open Related File](https://extensions.panic.com/extensions/eahanson/eahanson.related-files/)
+
+### [vscode](https://code.visualstudio.com)
+* repo: [synchronal/related-files.vscode](https://github.com/synchronal/related-files.vscode)
+* plugin: _in progress_
+
+## Details
+
+### Annotations
 
 An annotation starts with `@related`, followed by one or more Markdown-style links consisting of an arbitrary
 file type (e.g., "test", "css", "header") and a path to the file. The annotation ends with a newline character.
@@ -44,7 +61,7 @@ which would return:
       {name: "css", path: "/assets/style.css"}
     ]
 
-## Multi-line annotations
+### Multi-line annotations
 
 **NOT YET SUPPORTED**
 
@@ -56,11 +73,17 @@ for annotations:
     #   [test](/test/integration/bar_test.exs) \
     #   [sass](/assets/css/foo.sass)
 
-## File paths
+### File paths
 
 File paths are not validated by this library; they are just returned as-is. Paths starting with `/` are
 expected to be project-relative while paths that don't start with `/` are expected to be relative to the
 current file.
+
+## Usage
+
+This repo contains Javascript code to parse annotations in a string, returning a list of `key`/`path` objects.
+
+See the list of editor extensions above if you want a "related items" feature in your text editor.
 
 ## TODO
 
@@ -70,12 +93,14 @@ current file.
 
 ## Contributing
 
-Contributions are welcome. Use `bin/dev/test` to test changes, `bin/dev/build` to copy the changed JS file
-to the Nova extension dir.
+Contributions are welcome. Use the following scripts:
+* `bin/dev/update` will pull from git and then run `bin/dev/build` and `bin/dev/test`
+* `bin/dev/build` will install NPM packages and do any other necessary build-related tasks
+* `bin/dev/test` will run tests
+* `bin/dev/shipit` will update, build, test, and if all those succeed, push to `origin HEAD`
 
 ## License, Copyright, Attributions
 
-Copyright 2022 Erik Hanson.
-Apache 2.0 licensed (see [LICENSE](https://github.com/eahanson/related-files/blob/main/LICENSE)).
-The Nova extension's icon is a modified version of an icon from [Font Awesome](https://fontawesome.com/)
-which is licensed under [CC BY 4.0](https://fontawesome.com/license).
+Copyright 2022 Erik Hanson and synchronal.dev.
+Apache 2.0 licensed (see [LICENSE](https://github.com/synchronal/related-files/blob/main/LICENSE)).
+
