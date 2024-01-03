@@ -17,6 +17,9 @@ for text editor plugins.
 
 ## Text Editor Plugins
 
+### [emacs](https://www.gnu.org/software/emacs/)
+* repo: [https://github.com/sstoltze/related-files](https://github.com/sstoltze/related-files)
+
 ### [neovim](https://neovim.io)
 * repo: [synchronal/related-files.nvim](https://github.com/synchronal/related-files.nvim)
 
