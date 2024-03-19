@@ -1,6 +1,6 @@
 {
   "name": "related-files",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Parses 'related files' annotations in text",
   "main": "src/related.js",
   "scripts": {

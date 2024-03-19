@@ -82,6 +82,11 @@ File paths are not validated by this library; they are just returned as-is. Path
 expected to be project-relative while paths that don't start with `/` are expected to be relative to the
 current file.
 
+### Root file path
+
+The only option currently supported is `projectRoot`, which if specified is prepended to any path that starts
+with `/`.
+
 ## Usage
 
 This repo contains Javascript code to parse annotations in a string, returning a list of `key`/`path` objects.
@@ -104,6 +109,6 @@ Contributions are welcome. Use the following scripts:
 
 ## License, Copyright, Attributions
 
-Copyright 2022 Erik Hanson and synchronal.dev.
+Copyright 2022-2024 Erik Hanson and synchronal.dev.
 Apache 2.0 licensed (see [LICENSE](https://github.com/synchronal/related-files/blob/main/LICENSE)).
 
