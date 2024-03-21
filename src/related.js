@@ -3,7 +3,7 @@
 /*
  * Accepts a single string and returns an array of related file objects with `name` and `path` keys.
  * An optional config object can be passed as the second argument. If it contains a `projectRoot` key, then
- * its value will be prepended each found path.
+ * its value will be removed from each found path.
  */
 function related(text, config) {
   return findAnnotatedLines(text).reduce((lines, line) => {
@@ -27,7 +27,7 @@ function findLinks(line, config) {
   let match;
 
   while ((match = re.exec(line))) {
-    result.push({ name: match[1], path: applyProjectRoot(match[2], config) });
+    result.push({ name: match[1], path: removeProjectRoot(match[2], config) });
   }
 
   return result;
@@ -37,18 +37,31 @@ function isNonEmptyString(s) {
   return s && typeof s == "string" && !/^\s*$/.test(s);
 }
 
-function applyProjectRoot(path, config) {
-  if (path && path.startsWith("/")) {
-    const projectRoot = (config && config.projectRoot) || "";
-    return projectRoot.concat(path);
+function removeProjectRoot(path, config) {
+  const projectRoot = (config && config.projectRoot);
+  if (projectRoot) {
+    const regex = new RegExp("^/?" + removeLeadingSlash(projectRoot), "i");
+    return ensureLeadingSlash(path.replace(regex, ""));
   } else {
     return path;
   }
 }
 
+function removeLeadingSlash(s) {
+  return s.replace(/^\//, "");
+}
+
+function ensureLeadingSlash(s) {
+  if (s.startsWith("/")) {
+    return s;
+  } else {
+    return `/${s}`;
+  }
+}
+
 module.exports = {
   related,
-  _applyProjectRoot: applyProjectRoot,
+  _removeProjectRoot: removeProjectRoot,
   _findAnnotatedLines: findAnnotatedLines,
   _findLinks: findLinks
 };

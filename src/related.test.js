@@ -1,4 +1,4 @@
-const { related, _applyProjectRoot, _findAnnotatedLines, _findLinks } = require("./related");
+const { related, _removeProjectRoot, _findAnnotatedLines, _findLinks } = require("./related");
 
 describe("related", () => {
   test("returns [] when the input is not a string", () => {
@@ -136,30 +136,34 @@ describe("findLinks", () => {
     ]);
   });
 
-  test("prepends the project root to paths that start with '/' when specified in '.config/related-files.txt'", () => {
+  test("removes the project root if it is specified in the config", () => {
     expect(
       _findLinks(
-        "ant [bat](/bat.txt) cat [dog](dog.txt) eel [fox](/fox/fox.txt) gnu",
+        "ant [bat](/proj/root/bat.txt) cat [dog](/dog.txt) eel [fox](/proj/root/fox/fox.txt) gnu",
         { projectRoot: "/proj/root" }
       )
     ).toStrictEqual([
-      { name: "bat", path: "/proj/root/bat.txt" },
-      { name: "dog", path: "dog.txt" },
-      { name: "fox", path: "/proj/root/fox/fox.txt" },
+      { name: "bat", path: "/bat.txt" },
+      { name: "dog", path: "/dog.txt" },
+      { name: "fox", path: "/fox/fox.txt" },
     ]);
   });
 });
 
-describe("applyProjectRoot", () => {
+describe("removeProjectRoot", () => {
   test("returns the input when the config is undefined", () => {
-    expect(_applyProjectRoot("/ant/bat", undefined)).toStrictEqual("/ant/bat")
+    expect(_removeProjectRoot("/ant/bat", undefined)).toStrictEqual("/ant/bat")
   });
 
-  test("returns the input when the config does not have a 'project_root' key", () => {
-    expect(_applyProjectRoot("/ant/bat", {x: "y"})).toStrictEqual("/ant/bat")
+  test("returns the input when the config does not have a 'projectRoot' key", () => {
+    expect(_removeProjectRoot("/ant/bat", {x: "y"})).toStrictEqual("/ant/bat")
   });
 
-  test("prepends the project root", () => {
-    expect(_applyProjectRoot("/ant/bat", {projectRoot: "/cat/dog"})).toStrictEqual("/cat/dog/ant/bat")
+  test("removes the project root from the path, ignoring leading slashes and case", () => {
+    expect(_removeProjectRoot("/ant/bat/cat/dog", {projectRoot: "/ant/bat"})).toStrictEqual("/cat/dog")
+    expect(_removeProjectRoot("ant/bat/cat/dog", {projectRoot: "/ant/bat"})).toStrictEqual("/cat/dog")
+    expect(_removeProjectRoot("/ant/bat/cat/dog", {projectRoot: "ant/bat"})).toStrictEqual("/cat/dog")
+    expect(_removeProjectRoot("ant/bat/cat/dog", {projectRoot: "ant/bat"})).toStrictEqual("/cat/dog")
+    expect(_removeProjectRoot("ANT/bat/cat/dog", {projectRoot: "ant/BAT"})).toStrictEqual("/cat/dog")
   });
 });

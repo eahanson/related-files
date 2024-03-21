@@ -84,8 +84,23 @@ current file.
 
 ### Root file path
 
-The only option currently supported is `projectRoot`, which if specified is prepended to any path that starts
-with `/`.
+The only option currently supported is `projectRoot`, which can be used when a project's root directory can't be
+determined by an editor, for example when an editor's working directory is a subdirectory of the project's root.
+The value of the project root is then removed from the related file path to find the actual file in the project.
+
+Given this example config file:
+
+    {
+      "projectRoot": "/subprojects/proj1"
+    }
+
+And this example related annotation:
+
+    @related [test](/subrprojects/proj1/tests/hello_test.js)
+
+Then the returned related path would be:
+
+    /tests/hello_test.js
 
 ## Usage
 
